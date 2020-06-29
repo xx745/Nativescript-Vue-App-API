@@ -10,14 +10,16 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?ssl=trueretryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db(`${process.env.DB_NAME}`).collection(`${process.env.DB_COLLECTION}`);
-  console.log("Connected successfully to database!");
+const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-  client.close();
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(PORT, () => console.log(`Example app listening at http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`App is listening at http://localhost:${PORT}`));
+
+client.connect(err => {
+  console.log("Connected successfully to database!");
+  client.close();
+});
