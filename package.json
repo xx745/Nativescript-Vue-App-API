@@ -1,0 +1,30 @@
+{
+  "name": "todos-api",
+  "version": "1.0.0",
+  "description": "Simple API to serve as a middleman between NativeScript Vue App and the database.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pp87/-Nativescript-Vue-App-API.git"
+  },
+  "keywords": [
+    "vue",
+    "api",
+    "nativescript"
+  ],
+  "author": "Pawel Piegutkowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pp87/-Nativescript-Vue-App-API/issues"
+  },
+  "homepage": "https://github.com/pp87/-Nativescript-Vue-App-API#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
