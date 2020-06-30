@@ -5,6 +5,8 @@ const { connectDB, dbClient } = require('./connectDB');
 const express = require('express');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8082;
+const dbName = process.env.DB_NAME;
+const dbCollection = process.env.DB_COLLECTION;
 const app = express();
 
 app.use(bodyParser.json());
@@ -16,11 +18,11 @@ app.get('/', (req, res) => {
 
 app.get('/all-todos', async (req, res) => {
   await connectDB();
-  const db = dbClient.db(process.env.DB_NAME);
-  const col = db.collection(process.env.DB_COLLECTION)
-  const allItems = await col.find({}).toArray();
+  const db = dbClient.db(dbName);
+  const col = db.collection(dbCollection)
+  const allTodos = await col.find({}).toArray();
 
-  res.json(allItems);
+  res.json(allTodos);
 });
 
 app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT}`));
