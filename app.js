@@ -13,7 +13,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  return res.send('Received a GET HTTP method');
+});
+
+app.post('/', (req, res) => {
+  return res.send('Received a POST HTTP method');
+});
+
+app.put('/', (req, res) => {
+  return res.send('This API does not use PUT HTTP method');
+});
+
+app.delete('/', (req, res) => {
+  return res.send('This API does not use DELETE HTTP method');
 });
 
 app.get('/all-todos', async (req, res) => {
