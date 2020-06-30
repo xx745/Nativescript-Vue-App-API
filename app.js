@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '/config/.env') });
 const { connectDB, dbClient } = require('./connectDB');
 const express = require('express');
-const { expressCspHeader, NONCE } = require('express-csp-header');
+const { expressCspHeader, NONCE, SELF } = require('express-csp-header');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8082;
 const dbName = process.env.DB_NAME;
