@@ -1,9 +1,9 @@
-const path = require('path');
-const dotenv = require('dotenv');
+import path from 'path';
+import dotenv from 'dotenv';
 dotenv.config({ path: path.join(__dirname, '/config/.env') });
-const { connectDB, dbClient } = require('./connectDB');
-const express = require('express');
-const bodyParser = require('body-parser');
+import { connectDB, dbClient } from './connectDB';
+import express from 'express';
+import bodyParser from 'body-parser';
 const PORT = process.env.PORT || 8082;
 const dbName = process.env.DB_NAME;
 const dbCollection = process.env.DB_COLLECTION;
