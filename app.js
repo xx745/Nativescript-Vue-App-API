@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '/config/.env') });
 const { connectDB, dbClient } = require('./connectDB');
 const express = require('express');
+const { expressCspHeader, NONCE } = require('express-csp-header');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8082;
 const dbName = process.env.DB_NAME;
@@ -11,6 +12,12 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressCspHeader({
+  directives: {
+    'default-src': [SELF],
+    'script-src': [NONCE]
+  }
+}));
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
