@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 // READ one
 router.get('/:id', (req, res) => {
-  res.send('one subscriber requested OK');
+  res.send(`User with ID: '${req.params.id}' has been requested.`);
 });
 
 // CREATE one
