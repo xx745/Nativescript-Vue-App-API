@@ -19,13 +19,4 @@ app.get('/', (req, res) => {
   return res.send('home route is working');
 });
 
-// app.get('/all-todos', async (req, res) => {
-//   await connectDB();
-//   const db = dbClient.db(dbName);
-//   const col = db.collection(dbCollection)
-//   const allTodos = await col.find({}).toArray();
-
-//   res.json(allTodos);
-// });
-
 app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT}`));
