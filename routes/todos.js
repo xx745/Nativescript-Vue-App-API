@@ -8,20 +8,23 @@ const { connectDB, dbClient } = require('../connectDB');
 const dbName = process.env.DB_NAME;
 const dbCollection = process.env.DB_COLLECTION;
 
-let db;
-let col;
+// let db;
+// let col;
 
-(async () => {
-  await connectDB();
-  db = dbClient.db(dbName);
-  col = db.collection(dbCollection);
-})();
+// (async () => {
+//   await connectDB();
+//   db = dbClient.db(dbName);
+//   col = db.collection(dbCollection);
+// })();
 
 async function getTodo(req, res, next) {
   const todoId = ObjectID(req.params.id);
   let todo;
 
   try {
+    await connectDB();
+    db = dbClient.db(dbName);
+    col = db.collection(dbCollection);
     todo = await col.findOne({_id: todoId});
     if (!todo) {
       return res.status(404).json({ message: `Cannot find todo with ID: ${req.params.id}` });
@@ -36,6 +39,9 @@ async function getTodo(req, res, next) {
 
 router.get('/', async (req, res) => {
   try {
+    await connectDB();
+    db = dbClient.db(dbName);
+    col = db.collection(dbCollection);
     const allTodos = await col.find({}).toArray();
     res.json(allTodos);
   } catch (err) {
@@ -50,7 +56,9 @@ router.get('/:id', getTodo, (req, res) => {
 router.post('/add-todo', async (req, res) => {
   try {
     const newTodo = { todoText: req.body.todoText };
-
+    await connectDB();
+    db = dbClient.db(dbName);
+    col = db.collection(dbCollection);
     col.insertOne(newTodo, (err, result) => {
       if (result) console.log(`Inserted ${result.insertedCount} todo successfully!`);
       if (err) console.error(err);
