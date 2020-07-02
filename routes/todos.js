@@ -8,40 +8,11 @@ const { connectDB, dbClient } = require('../connectDB');
 const dbName = process.env.DB_NAME;
 const dbCollection = process.env.DB_COLLECTION;
 
-// let db;
-// let col;
-
-// (async () => {
-//   await connectDB();
-//   db = dbClient.db(dbName);
-//   col = db.collection(dbCollection);
-// })();
-
-async function getTodo(req, res, next) {
-  const todoId = ObjectID(req.params.id);
-  let todo;
-
-  try {
-    await connectDB();
-    db = dbClient.db(dbName);
-    col = db.collection(dbCollection);
-    todo = await col.findOne({_id: todoId});
-    if (!todo) {
-      return res.status(404).json({ message: `Cannot find todo with ID: ${req.params.id}` });
-    }
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-
-  res.todo = todo;
-  next();
-};
-
 router.get('/', async (req, res) => {
   try {
     await connectDB();
-    db = dbClient.db(dbName);
-    col = db.collection(dbCollection);
+    const db = dbClient.db(dbName);
+    const col = db.collection(dbCollection);
     const allTodos = await col.find({}).toArray();
     res.json(allTodos);
   } catch (err) {
@@ -49,8 +20,17 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', getTodo, (req, res) => {
-  res.json(res.todo)
+router.get('/:id', async (req, res) => {
+  const todoId = ObjectID(req.params.id);
+  try {
+    await connectDB();
+    const db = dbClient.db(dbName);
+    const col = db.collection(dbCollection);
+    const todo = await col.findOne({_id: todoId});
+    res.status(200).json(todo)
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 });
 
 router.post('/add-todo', async (req, res) => {
