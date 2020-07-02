@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 // READ all
-router.get('/', (req, res) => {
-  res.send('all subscribers requested OK');
+router.get('/all', (req, res) => {
+  res.send('all users requested OK');
 });
 
 // READ one
@@ -13,7 +13,7 @@ router.get('/:id', (req, res) => {
 
 // CREATE one
 router.post('/add-one', (req, res) => {
-  res.send('one subscriber added OK');
+  res.send('one user was added successfully');
 });
 
 module.exports = router;

@@ -9,8 +9,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const subscribersRouter = require('./routes/subscribers');
-app.use('/subscribers', subscribersRouter);
+const userRouter = require('./routes/user');
+app.use('/user', userRouter);
 
 const todosRouter = require('./routes/todos');
 app.use('/todos', todosRouter);
