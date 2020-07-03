@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // READ all
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
   res.send('all users requested OK');
 });
 

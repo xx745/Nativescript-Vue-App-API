@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const userRouter = require('./routes/user');
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 const todosRouter = require('./routes/todos');
 app.use('/todos', todosRouter);
