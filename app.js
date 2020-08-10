@@ -3,8 +3,13 @@ dotenv.config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8082;
-const app = express();
+const morgan = require('morgan');
 const connectDB = require('./db');
+const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // Middleware
 app.use(bodyParser.json());
@@ -23,4 +28,6 @@ app.use('/todos', todosRouter);
 
 // Server Start
 app.listen(PORT, () => console.log(`Server is running at http://localhost:${PORT}`));
+
+// Database connection start
 connectDB();
