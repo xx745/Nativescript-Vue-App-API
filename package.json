@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "lint": "eslint '**/*.js'",
+    "lint_fix": "eslint '**/*.js' --fix"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "mongodb": "3.5.9"
   },
   "devDependencies": {
+    "eslint": "^7.6.0",
     "nodemon": "^2.0.4"
   },
   "engines": {
