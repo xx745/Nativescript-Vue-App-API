@@ -15,7 +15,6 @@ module.exports = {
     'semi': ['error', 'always'],
     'no-eval': 'error',
     'no-multi-spaces': 'error',
-    'capitalized-comments': 'error',
     'eol-last': ['error', 'always'],
     'no-dupe-keys': 'error',
     'no-irregular-whitespace': 'error',
