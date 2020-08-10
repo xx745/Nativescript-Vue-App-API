@@ -7,21 +7,20 @@ const morgan = require('morgan');
 const connectDB = require('./db');
 const app = express();
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
-
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // Routes
 app.get('/', (req, res) => {
   return res.send('home route is working');
 });
 
-const authRouter = require('./routes/auth');
-app.use('/auth', authRouter);
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
 
 const todosRouter = require('./routes/todos');
 app.use('/todos', todosRouter);
