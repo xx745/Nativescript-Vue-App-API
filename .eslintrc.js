@@ -19,11 +19,12 @@ module.exports = {
     'eol-last': ['error', 'always'],
     'no-dupe-keys': 'error',
     'no-irregular-whitespace': 'error',
-    // 'no-magic-numbers': ['error', 
-    //   { 'ignore': [1, 200, 201, 400, 404, 500] } // Can be extended by other HTTP status codes
-    // ],
     'camelcase': 'error',
-    'max-len': ['error', { 'code': 120 }]
-
+    'max-len': ['error', { 'code': 120 }],
+    'no-tabs': 'error',
+    'comma-spacing': ['error', { 'before': false, 'after': true }],
+    'comma-dangle': ['error', 'never'],
+    'no-trailing-spaces': 'error',
+    'no-whitespace-before-property': 'error'
   }
 };
