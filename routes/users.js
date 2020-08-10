@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../mongoose_models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 router.post('/register', (req, res) => {
   User.find({ email: req.body.email })
@@ -59,8 +60,18 @@ router.post('/login', (req, res) => {
         }
 
         if (result) {
+          const token = jwt.sign({
+            email: user[0].email,
+            userId: user[0]._id
+          },
+          process.env.JWT_PRV_KEY,
+          {
+            expiresIn: '1h'
+          });
+          console.log(`Auth token: ${token}`);
           return res.status(200).json({
-            'user_login': 'Auth successful'
+            'user_login': 'Auth successful',
+            'token': token
           });
         }
 
