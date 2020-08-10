@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 module.exports = {
   'env': {
     'commonjs': true,
@@ -27,6 +26,6 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'no-trailing-spaces': 'error',
     'no-whitespace-before-property': 'error',
-    "prefer-const": 'error'
+    'prefer-const': 'error'
   }
 };
