@@ -5,7 +5,7 @@ const dbClient = new MongoClient(process.env.DB_URI, { useNewUrlParser: true, us
 const connectDB = async function() {
   try {
     await dbClient.connect();
-    console.log("Connected successfully to MongoDB!");
+    console.log('Connected successfully to MongoDB!');
   } catch (err) {
     console.error(err.message);
     process.exit(1);
@@ -15,4 +15,4 @@ const connectDB = async function() {
 module.exports = {
   connectDB,
   dbClient
-}
+};

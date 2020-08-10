@@ -29,6 +29,7 @@
     "mongodb": "3.5.9"
   },
   "devDependencies": {
+    "eslint": "^7.6.0",
     "nodemon": "^2.0.4"
   },
   "engines": {

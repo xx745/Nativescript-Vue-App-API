@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
   try {
     const todo = await col.findOne({_id: todoId});
 
-    res.status(200).json(todo)
+    res.status(200).json(todo);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
