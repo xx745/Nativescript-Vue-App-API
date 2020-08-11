@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const ToDo = require('../mongoose_models/ToDo');
+const checkAuth = require('../express_middleware/checkAuth');
 
 router.get('/all', async (req, res) => {
   await ToDo.find({})
@@ -16,7 +17,7 @@ router.get('/all', async (req, res) => {
     });
 });
 
-router.post('/add', async (req, res) => {
+router.post('/add', checkAuth, async (req, res) => {
   const newToDo = new ToDo({
     text: req.body.text,
     completed: req.body.completed
@@ -35,7 +36,7 @@ router.post('/add', async (req, res) => {
   }
 });
 
-router.post('/delete/:todoId', async (req, res) => {
+router.post('/delete/:todoId', checkAuth, async (req, res) => {
   ToDo.deleteOne({ _id: req.params.todoId })
     .then(result => {
       res.status(200).json({
