@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 8082;
 const morgan = require('morgan');
 const connectDB = require('./db');
 const app = express();
+const session = require('express-session');
 
 // Middleware
 app.use(bodyParser.json());
@@ -13,9 +14,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+app.use(session({
+  secret: process.env.SESSION_SECRET_KEY,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 // Routes
 app.get('/', (req, res) => {
+  const session = req.session;
+  session.testVariable = 'yolo';
+  console.log(session);
   return res.send('home route is working');
 });
 
