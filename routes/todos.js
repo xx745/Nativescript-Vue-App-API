@@ -2,7 +2,7 @@ const router = require('express').Router();
 const ToDo = require('../mongoose_models/ToDo');
 const checkAuth = require('../express_middleware/checkAuth');
 
-router.get('/all', async (req, res) => {
+router.get('/all', checkAuth, async (req, res) => {
   await ToDo.find({})
     .exec()
     .then(result => {

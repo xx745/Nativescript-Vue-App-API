@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const User = require('../mongoose_models/User');
+const checkAuth = require('../express_middleware/checkAuth');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
@@ -42,7 +43,7 @@ router.post('/register', (req, res) => {
     });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
@@ -88,7 +89,7 @@ router.post('/login', (req, res) => {
     });
 });
 
-router.post('/delete/:userId', (req, res) => {
+router.post('/delete/:userId', checkAuth, async (req, res) => {
   User.deleteOne({ _id: req.params.userId })
     .then(result => {
       res.status(200).json({
